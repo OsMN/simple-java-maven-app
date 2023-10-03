@@ -30,6 +30,7 @@ pipeline {
                     -Dsonar.host.url=http://localhost:9000
                     '
                 }
+            }
         }        
     }    
 }
