@@ -21,5 +21,15 @@ pipeline {
                 }
             }
         }
+        stage('Sonarqube Analisys - SAST') {
+            steps {
+                withSonarQubeEnv('sonarqube-server'){
+                    sh '
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=00-simple-java-maven \
+                    -Dsonar.host.url=http://localhost:9000
+                    '
+                }
+        }        
     }    
 }
