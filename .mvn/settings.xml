@@ -1,0 +1,9 @@
+<settings>
+  <servers>
+    <server>
+      <id>nexus</id>
+      <username>jenkins-user</username>
+      <password>jenkins</password>
+    </server>
+  </servers>
+</settings>
