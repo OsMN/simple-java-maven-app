@@ -33,8 +33,8 @@ pipeline
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh "mvn sonar:sonar \
-                              -Dsonar.projectKey=0-simple-java-maven \
-                        -Dsonar.host.url=http://localhost:9000" 
+                              -Dsonar.projectKey=00-simple-java-maven \
+                        -Dsonar.host.url=http://127.0.0.1:9000" 
                 }
 //           timeout(time: 2, unit: 'MINUTES') {
 //                      script {
