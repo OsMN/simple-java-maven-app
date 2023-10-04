@@ -30,7 +30,7 @@ pipeline
                 withSonarQubeEnv('SonarQube') {
                     sh "mvn sonar:sonar -Dsonar.projectKey=Simple-java-maven \
                             -Dsonar.projectName='Simple java maven' \
-                            -Dsonar.host.url=http://127.0.0.1:9000 \
+                            -Dsonar.host.url=http://sonarqube:9000 \
                             -Dsonar.token=sqp_6c0db8b5d88986285b3ac1d4417879316464a5b5"
                 }
 //           timeout(time: 2, unit: 'MINUTES') {
