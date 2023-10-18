@@ -9,8 +9,6 @@ pipeline
         stage('Test') 
         {
             steps {
-                // Clean before build
-                cleanWs()
                 sh 'mvn test'
             }
             post {
@@ -41,6 +39,7 @@ pipeline
         { 
             steps 
             {
+                sh "rm -rf build"
                 sh "mkdir build \
                         && cd build \
                         && cp ../target/my-app-cd-*.jar app.jar \
