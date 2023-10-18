@@ -10,7 +10,14 @@ public class App {
     public App() {}
 
     public static void main(String[] args) {
-        System.out.println(MESSAGE);
+        int i = 0;
+        while(true)
+        {
+            System.out.println(MESSAGE + " - " + i);
+            i++;
+            sleep(5000);
+        }
+
     }
 
     public String getMessage() {
