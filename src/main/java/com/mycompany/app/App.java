@@ -11,12 +11,13 @@ public class App {
 
     public static void main(String[] args) {
         try {
-            int i = 0;
-            while(true)
+            //int i = 0;
+            //while(true)
+            for(int i = 0; i<= 100 ; i++)
             {
                 System.out.println(MESSAGE + " - v2- " + i);
                 Thread.sleep(5000);
-                i++;
+            //    i++;
             }
         }catch(Exception e) {
 			System.out.println(e);
