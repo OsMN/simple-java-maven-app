@@ -43,7 +43,7 @@ pipeline
                         && cd build \
                         && cp ../target/my-app-cd-*.jar app.jar \
                         && cp ../Dockerfile . \
-                        docker build -t helloworld"
+                        && docker build -t helloworld"
             }
         }       
 
