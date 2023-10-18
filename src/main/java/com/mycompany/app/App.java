@@ -18,7 +18,6 @@ public class App {
                 Thread.sleep(5000);
                 i++;
             }
-        }
         }catch(Exception e) {
 			System.out.println(e);
 		}
