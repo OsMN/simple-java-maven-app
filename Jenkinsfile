@@ -50,7 +50,7 @@ pipeline
         { 
             steps 
             {
-                sh 'mvn -s .mvn/settings.xml deploy -DskipTests' 
+                sh 'rm -rf target/*.jar && mvn -s .mvn/settings.xml deploy -DskipTests' 
             }
         }       
         stage('Build image') 
