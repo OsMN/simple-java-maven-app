@@ -35,16 +35,23 @@ pipeline
                 sh 'mvn -s .mvn/settings.xml deploy -DskipTests' 
             }
         }       
+        stage('Build image') 
+        { 
+            steps 
+            {
+                sh "mkdir build \
+                        && cd build \
+                        && cp ../target/my-app-cd-*.jar app.jar \
+                        && cp ../Dockerfile . \
+                        docker build -t helloworld"
+            }
+        }       
+
        stage('Deploy') 
         { 
             steps 
             {
                 echo "Pasos para desplegar version"
-                sh "mkdir deploy \
-                        && cd deploy \
-                        && cp ../target/my-app-cd-*.jar app.jar \
-                        && cp ../Dockerfile ."
-                sh ""
 
             }
         }   
