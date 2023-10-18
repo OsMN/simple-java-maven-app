@@ -21,6 +21,7 @@ public class App {
             }
         }catch(Exception e) {
 			System.out.println(e);
+            throw e;
 		}
     }
 
