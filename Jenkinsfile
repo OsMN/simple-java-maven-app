@@ -13,7 +13,13 @@ pipeline
     {
         stage('Build') 
         { 
-            when (BRANCH_NAME != '00-cd-enagas') {
+            when {
+                expression {
+                    return env.BRANCH_NAME != '00-cd-enagas';
+                }
+            }
+            steps 
+            {
                 sh 'mvn -B -DskipTests clean package' 
             }
         }
