@@ -1,6 +1,7 @@
 def deploy_on_environment = params.Entorno
 def project_version = params.Version
 def timestamp = new Date().format("yyyyMMddHHmmssSS")
+def name_image_docker = "NoName"
 
 pipeline 
 {
@@ -58,7 +59,6 @@ pipeline
             steps 
             {
                 script{
-                    def name_image_docker = "NoName"
                     if (Branch_name.equals("00-ci-enagas")) { name_image_docker = "ci-simple-app" }
                     else if (Branch_name.equals("00-cd-enagas")) { name_image_docker = "cd-simple-app" }
                     else if (Branch_name.equals("00-cicd-enagas")) { name_image_docker = "cicd-simple-app" }
