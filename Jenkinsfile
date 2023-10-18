@@ -53,7 +53,7 @@ pipeline
             steps 
             {
                 echo "Pasos para desplegar version"
-
+                sh "docker run -d cd-simple-app"
             }
         }   
     }    
