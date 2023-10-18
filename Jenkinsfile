@@ -40,6 +40,12 @@ pipeline
             steps 
             {
                 echo "Pasos para desplegar version"
+                sh "mkdir deploy \
+                        && cd deploy \
+                        && cp ../target/my-app-cd-*.jar app.jar \
+                        && cp ../Dockerfile ."
+                sh ""
+
             }
         }   
     }    
