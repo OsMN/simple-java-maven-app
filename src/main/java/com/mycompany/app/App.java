@@ -14,7 +14,7 @@ public class App {
             int i = 0;
             while(true)
             {
-                System.out.println(MESSAGE + " - " + i);
+                System.out.println(MESSAGE + " - v2- " + i);
                 Thread.sleep(5000);
                 i++;
             }
