@@ -10,13 +10,18 @@ public class App {
     public App() {}
 
     public static void main(String[] args) {
-        int i = 0;
-        while(true)
-        {
-            System.out.println(MESSAGE + " - " + i);
-            i++;
+        try {
+            int i = 0;
+            while(true)
+            {
+                System.out.println(MESSAGE + " - " + i);
+                Thread.sleep(5000);
+                i++;
+            }
         }
-
+        }catch(Exception e) {
+			System.out.println(e);
+		}
     }
 
     public String getMessage() {
