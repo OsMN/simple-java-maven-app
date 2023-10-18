@@ -13,6 +13,9 @@ pipeline
     {
         stage('Build') 
         { 
+            when (BRANCH_NAME != '00-cd-enagas') {
+                sh 'mvn -B -DskipTests clean package' 
+            }
         }
         stage('Test') 
         {
