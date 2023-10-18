@@ -15,7 +15,7 @@ public class App {
         {
             System.out.println(MESSAGE + " - " + i);
             i++;
-            sleep(5000);
+            Thread.sleep(5000);
         }
 
     }
