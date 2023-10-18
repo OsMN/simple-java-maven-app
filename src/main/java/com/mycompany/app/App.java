@@ -6,7 +6,7 @@ package com.mycompany.app;
 public class App {
 
     private static final String MESSAGE = "Hello World!";
-
+    private static final String ENVIRONMENT = "CD";
     public App() {}
 
     public static void main(String[] args) {
@@ -15,7 +15,7 @@ public class App {
             //while(true)
             for(int i = 0; i<= 100 ; i++)
             {
-                System.out.println(MESSAGE + " - v2- " + i);
+                System.out.println(MESSAGE + " - " + ENVIRONMENT + " -> " + i);
                 Thread.sleep(5000);
             //    i++;
             }
