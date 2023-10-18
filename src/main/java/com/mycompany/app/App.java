@@ -21,7 +21,6 @@ public class App {
             }
         }catch(InterruptedException e) {
 			System.out.println(e);
-            throw e;
 		}
     }
 
