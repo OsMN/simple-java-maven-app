@@ -27,7 +27,18 @@ pipeline
                             -Dsonar.token=sqp_abed0b140c50527b7fe01f83224e8c1742528264"
                 }
             }
-        }    
+        }
+        stage("Quality Gate") 
+        {
+            steps {
+                script {
+                    def qg = waitForQualityGate()
+                    if (qg.status != 'OK') {
+                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                    }
+                }
+            }
+        }
         stage('Release') 
         { 
             steps 
