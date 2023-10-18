@@ -76,13 +76,15 @@ pipeline
         { 
             steps 
             {
-                if (Entorno.equals("DES")) { deploy_on_environment = "development_env" }
-                else if (Entorno.equals("PRE")) { deploy_on_environment = "preproduction_env" }          
-                else if (Entorno.equals("CICD")) { deploy_on_environment = "cicd-full_env" }
-                echo "Pasos para desplegar version"
-                sh "docker stop ${deploy_on_environment} || true"
-                sh "docker rm ${deploy_on_environment} || true"
-                sh "docker run --name ${deploy_on_environment} -d ${name_image_docker}"
+                script{
+                    if (Entorno.equals("DES")) { deploy_on_environment = "development_env" }
+                    else if (Entorno.equals("PRE")) { deploy_on_environment = "preproduction_env" }          
+                    else if (Entorno.equals("CICD")) { deploy_on_environment = "cicd-full_env" }
+                    echo "Pasos para desplegar version"
+                    sh "docker stop ${deploy_on_environment} || true"
+                    sh "docker rm ${deploy_on_environment} || true"
+                    sh "docker run --name ${deploy_on_environment} -d ${name_image_docker}"
+                }
             }
         }   
     }    
