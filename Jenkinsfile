@@ -26,12 +26,21 @@ pipeline
                             -Dsonar.host.url=http://sonarqube:9000 \
                             -Dsonar.token=sqp_abed0b140c50527b7fe01f83224e8c1742528264"
                 }
-//           timeout(time: 2, unit: 'MINUTES') {
-//                      script {
-//                        waitForQualityGate abortPipeline: true
-//                    }
-//                }
             }
-        }            
+        }    
+        stage('Release') 
+        { 
+            steps 
+            {
+                sh 'mvn -s .mvn/settings.xml deploy -DskipTests' 
+            }
+        }       
+       stage('Deploy') 
+        { 
+            steps 
+            {
+                echo "Pasos para desplegar version"
+            }
+        }   
     }    
 }
