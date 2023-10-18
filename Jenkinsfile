@@ -11,7 +11,6 @@ pipeline
             steps 
             {
                 sh 'mvn -B -DskipTests clean package' 
-//                sh 'mvn -s .mvn/settings.xml deploy -DskipTests' 
             }
         }
         stage('Test') 
