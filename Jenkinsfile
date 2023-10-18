@@ -53,7 +53,9 @@ pipeline
             steps 
             {
                 echo "Pasos para desplegar version"
-                sh "docker run -d cd-simple-app"
+                sh "docker stop cd-simple-app || true"
+                sh "docker rm cd-simple-app || true"
+                sh "docker run --name cd-simple-app -d cd-simple-app"
             }
         }   
     }    
