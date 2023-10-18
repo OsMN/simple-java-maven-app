@@ -1,3 +1,8 @@
+def deploy_on_environment = "NoEnvironment"
+def project_version = params.Version
+def timestamp = new Date().format("yyyyMMddHHmmssSS")
+def name_image_docker = "NoName"
+
 pipeline 
 {
     agent any
@@ -53,19 +58,25 @@ pipeline
         { 
             steps 
             {
-                sh 'mvn -s .mvn/settings.xml deploy -DskipTests' 
+                sh "rm -rf target/*.jar && \
+                        mvn -s .mvn/settings.xml deploy -DskipTests"
             }
         }       
         stage('Build image') 
         { 
             steps 
             {
-                sh "rm -rf build"
-                sh "mkdir build \
-                        && cd build \
-                        && cp ../target/my-app-*.jar app.jar \
-                        && cp ../Dockerfile . \
-                        && docker build . -t cicd-simple-app"
+                script{
+                    if (Branch_name.equals("00-ci-enagas")) { name_image_docker = "ci-simple-app" }
+                    else if (Branch_name.equals("00-cd-enagas")) { name_image_docker = "cd-simple-app" }
+                    else if (Branch_name.equals("00-cicd-enagas")) { name_image_docker = "cicd-simple-app" }
+                    sh "rm -rf build"
+                    sh "mkdir build \
+                            && cd build \
+                            && cp ../target/my-app-*.jar app.jar \
+                            && cp ../Dockerfile . \
+                            && docker build . -t ${name_image_docker}"
+                }
             }
         }       
 
@@ -73,10 +84,15 @@ pipeline
         { 
             steps 
             {
-                echo "Pasos para desplegar version"
-                sh "docker stop cicd-simple-app || true"
-                sh "docker rm cicd-simple-app || true"
-                sh "docker run --name cicd-simple-app -d cicd-simple-app"
+                script{
+                    if (Entorno.equals("DES")) { deploy_on_environment = "development_env" }
+                    else if (Entorno.equals("PRE")) { deploy_on_environment = "preproduction_env" }          
+                    else if (Entorno.equals("CICD")) { deploy_on_environment = "cicd-full_env" }
+                    echo "Pasos para desplegar version"
+                    sh "docker stop ${deploy_on_environment} || true"
+                    sh "docker rm ${deploy_on_environment} || true"
+                    sh "docker run --name ${deploy_on_environment} -d ${name_image_docker}"
+                }
             }
         }   
     }    
