@@ -36,6 +36,11 @@ pipeline
         }
         stage('Sonarqube Analysis - SAST') 
         {
+            when {
+                expression {
+                    return env.BRANCH_NAME != '00-ci-enagas';
+                }
+            }
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh "mvn sonar:sonar -Dsonar.projectKey=00-CD-Simpleje-java \
@@ -47,6 +52,11 @@ pipeline
         }
         stage("Quality Gate") 
         {
+            when {
+                expression {
+                    return env.BRANCH_NAME != '00-ci-enagas';
+                }
+            }
             steps {
                 echo "Pasos para validar las QualityGate de Sonar."
 //                script {
@@ -61,6 +71,11 @@ pipeline
         }
         stage('Release') 
         { 
+            when {
+                expression {
+                    return env.BRANCH_NAME != '00-ci-enagas';
+                }
+            }
             steps 
             {
                 sh 'rm -rf target/*.jar && mvn -s .mvn/settings.xml deploy -DskipTests' 
@@ -68,6 +83,11 @@ pipeline
         }       
         stage('Build image') 
         { 
+            when {
+                expression {
+                    return env.BRANCH_NAME != '00-ci-enagas';
+                }
+            }
             steps 
             {
                 script{
@@ -86,6 +106,11 @@ pipeline
 
        stage('Deploy') 
         { 
+            when {
+                expression {
+                    return env.BRANCH_NAME != '00-ci-enagas';
+                }
+            }
             steps 
             {
                 script{
