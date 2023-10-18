@@ -10,14 +10,19 @@ public class App {
     public App() {}
 
     public static void main(String[] args) {
-        //int i = 0;
-        //while(true)
-        for(int i = 0; i<= 100 ; i++)
-        {
-            System.out.println(MESSAGE + " - v2- " + i);
-            Thread.sleep(5000);
-        //    i++;
-        }
+        try {
+            //int i = 0;
+            //while(true)
+            for(int i = 0; i<= 100 ; i++)
+            {
+                System.out.println(MESSAGE + " - v2- " + i);
+                Thread.sleep(5000);
+            //    i++;
+            }
+        }catch(InterruptedException e) {
+			System.out.println(e);
+            throw e;
+		}
     }
 
     public String getMessage() {
