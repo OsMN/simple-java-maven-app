@@ -21,6 +21,7 @@ public class App {
             }
         }catch(InterruptedException e) {
 			System.out.println(e);
+            Thread.currentThread().interrupt();
 		}
     }
 
