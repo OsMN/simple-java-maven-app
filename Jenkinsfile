@@ -74,9 +74,9 @@ pipeline
                 sh "rm -rf build"
                 sh "mkdir build \
                         && cd build \
-                        && cp ../target/my-app-cd-*.jar app.jar \
+                        && cp ../target/my-app-*.jar app.jar \
                         && cp ../Dockerfile . \
-                        && docker build . -t cd-simple-app"
+                        && docker build . -t cicd-simple-app"
             }
         }       
 
@@ -85,9 +85,9 @@ pipeline
             steps 
             {
                 echo "Pasos para desplegar version"
-                sh "docker stop cd-simple-app || true"
-                sh "docker rm cd-simple-app || true"
-                sh "docker run --name cd-simple-app -d cd-simple-app"
+                sh "docker stop cicd-simple-app || true"
+                sh "docker rm cicd-simple-app || true"
+                sh "docker run --name cicd-simple-app -d cicd-simple-app"
             }
         }   
     }    
