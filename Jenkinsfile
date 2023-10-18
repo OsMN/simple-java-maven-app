@@ -25,21 +25,5 @@ pipeline
                 }
             }
         }
-        stage('Sonarqube Analysis - SAST') 
-        {
-            steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh "mvn sonar:sonar -Dsonar.projectKey=Simple-java-maven \
-                            -Dsonar.projectName='Simple java maven' \
-                            -Dsonar.host.url=http://sonarqube:9000 \
-                            -Dsonar.token=sqp_eb0d3790ccc0e5b53fe4fe2bc880b0576dfd2033"
-                }
-//           timeout(time: 2, unit: 'MINUTES') {
-//                      script {
-//                        waitForQualityGate abortPipeline: true
-//                    }
-//                }
-            }
-        }            
     }    
 }
