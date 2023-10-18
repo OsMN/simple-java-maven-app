@@ -57,16 +57,18 @@ pipeline
         { 
             steps 
             {
-                def name_image_docker = "NoName"
-                if (Branch_name.equals("00-ci-enagas")) { name_image_docker = "ci-simple-app" }
-                else if (Branch_name.equals("00-cd-enagas")) { name_image_docker = "cd-simple-app" }
-                else if (Branch_name.equals("00-cicd-enagas")) { name_image_docker = "cicd-simple-app" }
-                sh "rm -rf build"
-                sh "mkdir build \
-                        && cd build \
-                        && cp ../target/my-app-*.jar app.jar \
-                        && cp ../Dockerfile . \
-                        && docker build . -t ${name_image_docker}"
+                script{
+                    def name_image_docker = "NoName"
+                    if (Branch_name.equals("00-ci-enagas")) { name_image_docker = "ci-simple-app" }
+                    else if (Branch_name.equals("00-cd-enagas")) { name_image_docker = "cd-simple-app" }
+                    else if (Branch_name.equals("00-cicd-enagas")) { name_image_docker = "cicd-simple-app" }
+                    sh "rm -rf build"
+                    sh "mkdir build \
+                            && cd build \
+                            && cp ../target/my-app-*.jar app.jar \
+                            && cp ../Dockerfile . \
+                            && docker build . -t ${name_image_docker}"
+                }
             }
         }       
 
