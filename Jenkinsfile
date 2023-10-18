@@ -8,10 +8,9 @@ pipeline
     {
         stage('Test') 
         {
-            // Clean before build
-            cleanWs()
-            
             steps {
+                // Clean before build
+                cleanWs()
                 sh 'mvn test'
             }
             post {
