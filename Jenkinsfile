@@ -79,10 +79,5 @@ pipeline
                 sh "docker run --name cicd-simple-app -d cicd-simple-app"
             }
         }   
-    } 
-    post {
-        always {
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-        }
-    }       
+    }      
 }
