@@ -30,7 +30,7 @@ pipeline
                 withSonarQubeEnv('SonarQube') {
                     sh "mvn sonar:sonar -Dsonar.projectKey=00-CD-Simpleje-java \
                             -Dsonar.projectName='00 CD Simpleje java' \
-                            -Dsonar.host.url=http://sonarqube:9000 \
+                            -Dsonar.host.url=http://sonarqube894:9000 \
                             -Dsonar.token=fa4469dbdb170015e678977b405e1d9fa57350a6"
                 }
             }
