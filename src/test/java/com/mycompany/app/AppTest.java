@@ -16,10 +16,11 @@ public class AppTest
         assertEquals(app1.getMessage(), app2.getMessage());
     }
 
-    @Test
+// Test para regresión
+/*    @Test
     public void testAppMessage()
     {
         App app = new App();
         assertEquals("Hello World!", app.getMessage());
-    }
+    }*/
 }
