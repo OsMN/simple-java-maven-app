@@ -5,7 +5,7 @@ package com.mycompany.app;
  */
 public class App {
 
-    private static final String MESSAGE = "Hello World!!";
+    private static final String MESSAGE = "Hello World!";
 
     public App() {}
 
@@ -17,7 +17,7 @@ public class App {
             {
                 System.out.println(MESSAGE + " - v2- " + i);
                 Thread.sleep(5000);
-            //    i++;
+            //    i++; 
             }
         }catch(InterruptedException e) {
 			System.out.println(e);
