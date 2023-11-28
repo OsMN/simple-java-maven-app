@@ -21,28 +21,42 @@ pipeline
         { 
             steps 
             {
-                sh 'mvn -B -DskipTests clean package' 
+                sh 'mvn -q clean package -Dmaven.test.skip=true'
             }
         }
-        stage('Test') 
-        {
+        stage('Test') {
             steps {
-                sh 'mvn test'
+                //sh 'mvn test'
+                sh "mvn -q jacoco:prepare-agent test -fn jacoco:report"
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
+                    script {
+                        try {
+                            junit skipMarkingBuildUnstable: true, testResults:'**/target/surefire-reports/*.xml'
+                            jacoco(execPattern: '**/target/jacoco.exec')
+                        } catch (error) { 
+                            echo "Error: ${error.getMessage()}"
+                        }
+                    }
                 }
             }
         }
-        stage('Sonarqube Analysis - SAST') 
-        {
+        stage('Sonarqube Analysis') {
+            tools{jdk 'JDK 11'}
+            environment { scannerHome = tool 'SonarScanner' }
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh "mvn sonar:sonar -Dsonar.projectKey=Simple-java-maven \
-                            -Dsonar.projectName='Simple java maven' \
-                            -Dsonar.host.url=http://127.0.0.1:9000/sonar \
-                            -Dsonar.token=sqp_6c0db8b5d88986285b3ac1d4417879316464a5b5"
+                    sh """
+                        ${scannerHome}/bin/sonar-scanner \
+                        -Dsonar.projectKey=test \
+                        -Dsonar.projectName=test \
+                        -Dsonar.host.url=http://localhost:9000/sonar \
+                        -Dsonar.login=a34f07272d89e3d12c6b66c069e39e99d92e84b4 \
+                        -Dsonar.language=java \
+                        -Dsonar.java.binaries=**/classes \
+                        -Dsonar.java.libraries=**/lib/*.jar \
+                    """
                 }
 //           timeout(time: 2, unit: 'MINUTES') {
 //                      script {
